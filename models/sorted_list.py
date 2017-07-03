@@ -6,6 +6,7 @@ import json
 class SortedList(Resource):
     LogInfo = {'host': '182.254.230.24', 'user': 'fleeter', 'passwd': 'hust201417',
                'port': 3306, 'charset': 'utf8', 'database': 'fleeting'}
+
     type_dict = {"anime": "动画短片", "joy": "娱乐", "music": "音乐"}
     video_list = []
     conn = None
@@ -16,6 +17,7 @@ class SortedList(Resource):
                                             passwd=self.LogInfo['passwd'],
                                             port=self.LogInfo['port'], charset=self.LogInfo['charset'],
                                             database=self.LogInfo['database'])
+
         self.cur = self.conn.cursor(buffered=True)
 
     def __del__(self):
@@ -39,7 +41,7 @@ class SortedList(Resource):
             self.video_list.append(video)
         return self.video_list
 
-
 if __name__ == '__main__':
     test = SortedList()
-    print(test)
+    print(test.get())
+

@@ -12,7 +12,9 @@ cur = conn.cursor()
 # Choose type TODO: Add more types and urls
 video_type_url = {"娱乐": "http://www.acfun.cn/rank.aspx?channelId=60&range=1&count=30&ext=1&date=",
                   "动画短片": "http://www.acfun.cn/rank.aspx?channelId=106&range=3&count=30&ext=1&date=",
-                  "音乐": "http://www.acfun.cn/rank.aspx?channelId=137&range=1&count=30&ext=1&date="
+                  "音乐": "http://www.acfun.cn/rank.aspx?channelId=137&range=1&count=30&ext=1&date=",
+                  "游戏": "http://www.acfun.cn/rank.aspx?channelId=85&range=1&count=30&ext=1&date=",
+                  "舞蹈": "http://www.acfun.cn/rank.aspx?channelId=135&range=1&count=30&ext=1&date="
                   }
 # Insert video information into the database
 for type_video in video_type_url:
@@ -32,7 +34,7 @@ for type_video in video_type_url:
         except:
             continue
 
-        size = int(json.loads(temp)["streams"]["__default__"]["size"] / 1024)
+        size = int(json.loads(temp)["streams"]["__default__"]["size"] / 1024/1024)
         title = res[i]['title']
         description = res[i]['description']
         cover = res[i]['titleImg']

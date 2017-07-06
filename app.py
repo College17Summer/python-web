@@ -6,9 +6,18 @@ from flask import request
 
 from models.recommend_list import RecommendList
 from models.sorted_list import SortedList
+from models.log_in import Login
+from models.collection import Collection
 
 app = Flask(__name__)
 api = flask_restful.Api(app)
+# mysql://username:password@server:port/db
+
+# app.config.from_pyfile('config/test.cfg')
+# db = SQLAlchemy(app)
+# from orm.fl_video import User
+# db.create_all()
+
 
 
 class HelloWorld(flask_restful.Resource):
@@ -17,13 +26,19 @@ class HelloWorld(flask_restful.Resource):
 
 
 api.add_resource(HelloWorld, '/')
+# 返回推荐列表
 api.add_resource(RecommendList, "/fleeting/api/v1.0/recommendlist")
+# 返回分类列表
 api.add_resource(SortedList, "/fleeting/api/v1.0/sortedlist", "/fleeting/api/v1.0/sortedlist/<string:video_type>")
+# 用户登录注册
+api.add_resource(Login, "/fleeting/api/v1.0/user/<string:type>")
+# 用户登录后返回收藏夹信息
+api.add_resource(Collection, "/fleeting/api/v1.0/user/collection", "/fleeting/api/v1.0/user/collection/<string:username>")
 
-api.add_resource(SortedList, "/fleeting/api/v1.0/sortedlist", "/fleeting/api/v1.0/sortedlist/<string:type>")
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', debug=True)
+
 
 '''
 tasks = [
